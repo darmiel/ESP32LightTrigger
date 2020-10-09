@@ -20,7 +20,6 @@ class Control:
 
 
 class Switch (Control):
-
     value: bool = False
 
     x: int = None
@@ -59,7 +58,6 @@ class Switch (Control):
         else:
             dp.fill_rect(self.x + 9, self.y + 2, 4, 4, self.color)
 
-
 class ProgressBar (Control):
     value: int = 0  # from 0 to 100
     style: int = 1  # select from 1 to 2
@@ -91,7 +89,7 @@ class ProgressBar (Control):
             dp = self._display
         dp.rect(self.x, self.y, self.width, self.height, self.color)
 
-    def __get_width(self, possible: int):
+    def __get_width(self, possible: int) -> int:
         value: int = max(0, min(100, self.value))
 
         res: int = math.ceil((possible / 100.0) * value)

@@ -13,21 +13,19 @@ class Menu:
 
         self._display = display
 
-    def add(self, control: Control):
+    def add(self, control: Control) -> None:
         self.controls.append(control)
 
     # Overwrite this in your menu. 
     # Will be calld before drawing the controls
-    def on_draw(self, dp: SH1106):
+    def on_draw(self, dp: SH1106) -> None:
         pass
 
-    def draw_controls(self, dp: SH1106):
-   
-
+    def draw_controls(self, dp: SH1106) -> None:
         for control in self.controls:
             control.draw(self._display)
 
-    def draw(self, dp: SH1106 = None):
+    def draw(self, dp: SH1106 = None) -> None:
         if dp == None:
             dp = self._display
 
@@ -42,6 +40,7 @@ class MainMenu (Menu):
     delay: int = 10000
     blob: int = 500
     active: bool = False
+    test: bool = False
 
     def draw_logo(self, display: SH1106, x: int, y: int) -> None:
         display.pixel(x + 1, y + 0, 1)
@@ -175,6 +174,13 @@ class MainMenu (Menu):
 
         self.draw(display)
 
+    def hover_test(self, hover:bool = False, dp: SH1106 = None) -> None:
+        if dp == None:
+            dp = self._display
+
+        self.test = hover
+        self.draw(dp)
+
     def on_draw(self, display: SH1106) -> None:
         # clear
         display.fill(0)
@@ -202,7 +208,7 @@ class MainMenu (Menu):
 
         # Test
         test_btn: Button = Button(8, 39, "TEST", width=38, height=13)
-        test_btn.hover = False
+        test_btn.hover = self.test
         test_btn.draw(display)
 
         # Active
@@ -225,11 +231,9 @@ class MessageMenu (Menu):
         self.draw(display)
 
     # 26
-    def draw(self, dp: SH1106 = None):
+    def draw(self, dp: SH1106 = None) -> None:
         if (self.value <= 0):
             return
-
-        print("Draw!")
 
         if dp == None:
             dp = self._display
