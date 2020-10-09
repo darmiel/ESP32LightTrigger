@@ -60,7 +60,7 @@ RELAY: Pin = Pin(18, Pin.OUT)
 
 def callback_light_sensor(pin: Pin):
    
-    new_value: int = pin.value()
+    new_value: int = not pin.value()
     if config.LIGHT_SENSOR_STATE == new_value:
         return
 

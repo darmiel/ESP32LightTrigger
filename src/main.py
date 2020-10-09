@@ -1,9 +1,7 @@
-from controls import Switch, ProgressBar, Button
-
 from machine import Pin, SoftI2C
 from sh1106 import SH1106, SH1106_I2C
 
-from menu import Menu, MainMenu, MessageMenu
+from menu import MainMenu
 
 from time import sleep
 from time import time

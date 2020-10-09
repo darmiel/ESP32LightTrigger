@@ -3,7 +3,6 @@ from controls import Control, Button, ProgressBar
 from time import sleep
 
 import math
-import config
 
 class Menu:
     _display: SH1106 = None
@@ -42,6 +41,7 @@ class Menu:
 class MainMenu (Menu):
     delay: int = 10000
     blob: int = 500
+    active: bool = False
 
     def draw_logo(self, display: SH1106, x: int, y: int) -> None:
         display.pixel(x + 1, y + 0, 1)
@@ -207,7 +207,7 @@ class MainMenu (Menu):
 
         # Active
         active_btn: Button = Button(82, 39, "ACT", width=38, height=13)
-        active_btn.hover = config.active()
+        active_btn.hover = self.active
         active_btn.draw(display)
 
         # Camera
