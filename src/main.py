@@ -20,5 +20,10 @@ config.DISPLAY.sleep(False)
 #
 config.MAIN_MENU = MainMenu(config.DISPLAY)
 
+# Updates values on main menu
+config.delay(config.delay())
+config.blob(config.blob())
+config.active(config.active())
+
 # Impoprt pin listeners
 import pinListener

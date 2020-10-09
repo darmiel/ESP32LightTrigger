@@ -112,5 +112,5 @@ def callback_test_pin(pin: Pin) -> None:
     if pin.value():
         exec_camera_shutter()
 
-TEST_PIN: Pin = Pin(5, Pin.IN, Pin.PULL_DOWN)
+TEST_PIN: Pin = Pin(4, Pin.IN, Pin.PULL_DOWN)
 TEST_PIN.irq(trigger=Pin.IRQ_FALLING, handler=callback_test_pin)
