@@ -1,28 +1,26 @@
 from controls import Switch, ProgressBar, Button
 
-from machine import Pin, I2C
+from machine import Pin, SoftI2C
 from sh1106 import SH1106, SH1106_I2C
 
-import json
+from menu import Menu, MainMenu, MessageMenu
 
-i2c: I2C = I2C(scl = Pin(22), sda = Pin(21), freq=400000)
-display: SH1106 = SH1106_I2C (128, 64, i2c, addr = 0x3c)
+from time import sleep
+from time import time
 
-display.sleep(False)
+import config
 
-# black background
-display.fill(0)
+#
+# Create Display
+#
+i2c: SoftI2C = SoftI2C(scl = Pin(22), sda = Pin(21), freq=400000)
+config.DISPLAY = SH1106_I2C (128, 64, i2c, addr = 0x3c)
+config.DISPLAY.sleep(False)
 
-active_button: Button = Button(display, 5, 5, "Akt", px = 1, py = 1)
-active_button.hover = True
-active_button.draw()
+#
+# Create Menu
+#
+config.MAIN_MENU = MainMenu(config.DISPLAY)
 
-print(active_button.__dict__)
-
-inactive_button: Button = Button(display, active_button.end_x + 5, 5, "Akt", px = 1, py = 1)
-inactive_button.hover = False
-inactive_button.draw()
-
-print(inactive_button.__dict__)
-
-display.show()
+# Impoprt pin listeners
+import pinListener
