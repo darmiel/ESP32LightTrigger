@@ -22,7 +22,7 @@ def callback_switch_pin(pin: Pin) -> None:
     config.MAIN_MENU.draw()
 
 
-SWITCH_PIN: Pin = Pin(17, Pin.IN, Pin.PULL_DOWN)
+SWITCH_PIN: Pin = Pin(5, Pin.IN, Pin.PULL_DOWN)
 SWITCH_PIN.irq(trigger=Pin.IRQ_FALLING, handler=callback_switch_pin)
 
 
@@ -50,10 +50,10 @@ def callback_button_down(pin: Pin) -> None:
         print("Not implemented.")
 
 
-VOL_UP_BTN: Pin = Pin(16, Pin.IN, Pin.PULL_DOWN)
+VOL_UP_BTN: Pin = Pin(17, Pin.IN, Pin.PULL_DOWN)
 VOL_UP_BTN.irq(trigger=Pin.IRQ_FALLING, handler=callback_button_up)
 
-VOL_DWN_BTN: Pin = Pin(15, Pin.IN, Pin.PULL_DOWN)
+VOL_DWN_BTN: Pin = Pin(16, Pin.IN, Pin.PULL_DOWN)
 VOL_DWN_BTN.irq(trigger=Pin.IRQ_FALLING, handler=callback_button_down)
 
 RELAY: Pin = Pin(18, Pin.OUT)
@@ -104,7 +104,7 @@ def callback_active_jumper (pin: Pin) -> None:
 
     config.active(value)
 
-ACTIVE_PIN: Pin = Pin(5, Pin.IN, Pin.PULL_DOWN)
+ACTIVE_PIN: Pin = Pin(4, Pin.IN, Pin.PULL_DOWN)
 ACTIVE_PIN.irq(trigger=Pin.IRQ_FALLING, handler=callback_active_jumper)
 
 def callback_test_pin(pin: Pin) -> None:
@@ -112,5 +112,5 @@ def callback_test_pin(pin: Pin) -> None:
     if pin.value():
         exec_camera_shutter()
 
-TEST_PIN: Pin = Pin(4, Pin.IN, Pin.PULL_DOWN)
+TEST_PIN: Pin = Pin(0, Pin.IN, Pin.PULL_DOWN)
 TEST_PIN.irq(trigger=Pin.IRQ_FALLING, handler=callback_test_pin)
